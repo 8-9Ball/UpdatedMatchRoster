@@ -461,6 +461,43 @@ function buildMsg() {
   return lines.join('\n');
 }
 
+// ─── AVAILABILITY IMPORT ─────────────────────────────────────────────────────
+// Reads ?av= URL parameter written by the player availability app.
+// Decodes player ID + availability, saves to localStorage, cleans the URL.
+// Returns { name, avail } on success, null if no valid import found.
+
+const AVAIL_LABELS = { both: 'Both games', eight: '8-ball only', nine: '9-ball only', out: 'Not available' };
+
+function processImport() {
+  const raw = new URLSearchParams(window.location.search).get('av');
+  if (!raw) return null;
+  try {
+    const { id, avail } = JSON.parse(atob(raw));
+    const player = S.players.find(p => p.id === id);
+    if (!player || !['both','eight','nine','out'].includes(avail)) return null;
+    S.avail[player.id] = avail;
+    window.history.replaceState({}, '', window.location.pathname);
+    return { name: player.name, avail };
+  } catch { return null; }
+}
+
+function showToast(msg) {
+  const existing = document.querySelector('.import-toast');
+  if (existing) existing.remove();
+  const el = document.createElement('div');
+  el.className = 'import-toast';
+  el.textContent = msg;
+  el.style.cssText = [
+    'position:fixed', 'bottom:1.5rem', 'left:50%', 'transform:translateX(-50%)',
+    'background:var(--text)', 'color:var(--bg)', 'padding:9px 20px',
+    'border-radius:20px', 'font-size:13px', 'font-weight:600', 'z-index:999',
+    'white-space:nowrap', 'box-shadow:0 4px 16px rgba(0,0,0,.18)',
+    'transition:opacity .3s',
+  ].join(';');
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 3000);
+}
+
 // ─── MAIN RENDER ─────────────────────────────────────────────────────────────
 function render() {
   updateChrome();
@@ -543,6 +580,16 @@ async function init() {
     S.lineup8 = S.lineup8.filter(id => validIds.has(id));
     S.lineup9 = S.lineup9.filter(id => validIds.has(id));
     Object.keys(S.avail).forEach(id => { if (!validIds.has(id)) delete S.avail[id]; });
+
+    // Handle one-tap availability import from player app (?av= URL param)
+    const imported = processImport();
+    if (imported) {
+      saveState();
+      S.tab = 'week';
+      render();
+      showToast('✓ ' + imported.name + ' — ' + AVAIL_LABELS[imported.avail]);
+      return;
+    }
 
   } catch (e) {
     document.getElementById('tab-content').innerHTML = `
