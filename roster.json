@@ -1,10 +1,10 @@
 [
-  {"id":"p1","name":"Chris Masters",  "h8":7,"h9":8,"w8":2,"g8":2,"w9":1,"g9":2},
-  {"id":"p2","name":"Mark Mazzon",    "h8":6,"h9":5,"w8":1,"g8":3,"w9":2,"g9":3},
+  {"id":"p1","name":"Chris Masters",  "h8":7,"h9":8,"w8":3,"g8":3,"w9":2,"g9":3},
+  {"id":"p2","name":"Mark Mazzon",    "h8":6,"h9":5,"w8":2,"g8":4,"w9":3,"g9":4},
   {"id":"p3","name":"Brad Allen",     "h8":5,"h9":5,"w8":1,"g8":2,"w9":1,"g9":2},
-  {"id":"p4","name":"Dan Piitz",      "h8":5,"h9":4,"w8":0,"g8":2,"w9":1,"g9":2},
-  {"id":"p5","name":"Raf Campos",     "h8":4,"h9":4,"w8":0,"g8":1,"w9":0,"g9":2},
-  {"id":"p6","name":"Pav Landry",     "h8":3,"h9":3,"w8":1,"g8":1,"w9":1,"g9":1},
-  {"id":"p7","name":"Zoran Janjanin", "h8":3,"h9":2,"w8":1,"g8":2,"w9":1,"g9":2},
+  {"id":"p4","name":"Dan Piitz",      "h8":5,"h9":4,"w8":0,"g8":2,"w9":2,"g9":3},
+  {"id":"p5","name":"Raf Campos",     "h8":4,"h9":4,"w8":0,"g8":2,"w9":0,"g9":3},
+  {"id":"p6","name":"Pav Landry",     "h8":3,"h9":3,"w8":1,"g8":2,"w9":1,"g9":1},
+  {"id":"p7","name":"Zoran Janjanin", "h8":3,"h9":2,"w8":1,"g8":2,"w9":1,"g9":3},
   {"id":"p8","name":"Aman Verma",     "h8":2,"h9":2,"w8":0,"g8":2,"w9":1,"g9":1}
 ]
